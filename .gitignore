@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenv / conda
+.venv/
+venv/
+.conda/
+
+# Data artifacts (do not commit)
+**/*.mp4
+**/*.pkl
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.webp
+**/*.txt
+
+# Generated analysis outputs
+homography_results.csv
+svm_features_from_cache.csv
+synthetic_label.csv
+label_combined.csv
+
+# Local outputs
+viz_out/
+synthetic_dataset/
+
+# OS
+.DS_Store
+

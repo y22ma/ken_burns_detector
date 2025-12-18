@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="640" viewBox="0 0 1400 640">
+  <defs>
+    <style>
+      .box { fill:#0b1220; stroke:#334155; stroke-width:2; rx:16; }
+      .box2 { fill:#0f172a; stroke:#475569; stroke-width:2; rx:16; }
+      .boxG { fill:#071a12; stroke:#14532d; stroke-width:2; rx:16; }
+      .boxY { fill:#1a1607; stroke:#713f12; stroke-width:2; rx:16; }
+      .title { fill:#f8fafc; font:700 20px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .h { fill:#e2e8f0; font:700 16px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .t { fill:#e2e8f0; font: 14px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .s { fill:#94a3b8; font: 13px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .arrow { stroke:#e2e8f0; stroke-width:2.6; fill:none; marker-end:url(#m); }
+      .dashed { stroke-dasharray:7 7; }
+      .pill { fill:#111827; stroke:#334155; stroke-width:1.6; rx:999; }
+      .pillText { fill:#e2e8f0; font: 13px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#e2e8f0"></path>
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="40" y="52" class="title">Rare Positive Boosting: Synthetic Ken Burns + V-JEPA2 Classification</text>
+  <text x="40" y="82" class="s">Goal: increase positive examples (Ken Burns) to stabilize training and improve recall on seldomly-occurring positives.</text>
+
+  <!-- Left: Real data -->
+  <rect x="40" y="120" width="390" height="210" class="box"></rect>
+  <text x="60" y="158" class="h">Real Dataset</text>
+  <text x="60" y="188" class="t">• Mixed videos (mostly negatives)</text>
+  <text x="60" y="212" class="t">• Few true Ken Burns positives</text>
+  <text x="60" y="236" class="t">• Labels: KB=1 / non-KB=0</text>
+  <text x="60" y="266" class="s">Problem: class imbalance → unstable splits, low recall</text>
+
+  <!-- Middle: Still frames source -->
+  <rect x="40" y="360" width="390" height="220" class="box2"></rect>
+  <text x="60" y="398" class="h">Still Image Source</text>
+  <text x="60" y="428" class="t">• Extract stills from videos</text>
+  <text x="60" y="452" class="t">• Or use external images</text>
+  <text x="60" y="476" class="t">• Ensure “static scene” assumption</text>
+  <text x="60" y="510" class="s">Feeds synthetic Ken Burns generator</text>
+
+  <!-- Synthetic generator -->
+  <rect x="470" y="360" width="420" height="220" class="boxG"></rect>
+  <text x="490" y="398" class="h">Synthetic Ken Burns Generator</text>
+  <text x="490" y="428" class="t">Apply smooth similarity motion over time:</text>
+  <text x="510" y="452" class="s">• scale(t), translation(t), rotation(t)</text>
+  <text x="510" y="474" class="s">• optional easing (smooth accel/decel)</text>
+  <text x="490" y="508" class="t">Output: kb_syn_*.mp4 + params JSON</text>
+  <text x="490" y="536" class="s">Label all synthetic clips as KB=1</text>
+
+  <!-- Arrows to synthetic -->
+  <path d="M430 470 L470 470" class="arrow"></path>
+  <path d="M235 330 L235 360" class="arrow dashed"></path>
+
+  <!-- Synthetic positives -->
+  <rect x="930" y="360" width="430" height="220" class="boxG"></rect>
+  <text x="950" y="398" class="h">Synthetic Positive Pool</text>
+  <text x="950" y="428" class="t">• Many “clean” KB positives</text>
+  <text x="950" y="452" class="t">• Diverse motion params / durations</text>
+  <text x="950" y="476" class="t">• Optional: add noise / compression</text>
+  <text x="950" y="510" class="s">Purpose: boost positives, reduce variance in training</text>
+
+  <path d="M890 470 L930 470" class="arrow"></path>
+
+  <!-- Combine + rebalance -->
+  <rect x="470" y="120" width="890" height="210" class="boxY"></rect>
+  <text x="490" y="158" class="h">Combine + Rebalance Training Set</text>
+  <text x="490" y="188" class="t">Train set = real videos (KB=0/1) + synthetic KB positives</text>
+  <text x="490" y="214" class="t">Strategies:</text>
+  <text x="510" y="238" class="s">• oversample KB=1 (synthetic + real)</text>
+  <text x="510" y="260" class="s">• class-weighted loss (pos_weight)</text>
+  <text x="510" y="282" class="s">• keep validation/test mostly real (to avoid “synthetic leakage”)</text>
+
+  <!-- Arrows from real + synthetic to combine -->
+  <path d="M430 225 L470 225" class="arrow"></path>
+  <path d="M1145 360 L1145 330" class="arrow"></path>
+
+  <!-- V-JEPA2 -->
+  <rect x="470" y="600" width="560" height="0" fill="none"></rect>
+  <rect x="470" y="610" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="620" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <!-- Model training box -->
+  <rect x="470" y="590" width="620" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <!-- Training block -->
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="590" width="0" height="0" fill="none"></rect>
+
+  <!-- Bottom: V-JEPA2 classifier -->
+  <rect x="470" y="585" width="890" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <!-- Place V-JEPA2 box slightly above bottom margin -->
+  <rect x="470" y="585" width="890" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <!-- Actual V-JEPA2 training box -->
+  <rect x="470" y="585" width="890" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="890" height="0" fill="none"></rect>
+
+  <rect x="470" y="585" width="0" height="0" fill="none"></rect>
+
+  <!-- Use a proper bottom band -->
+  <rect x="470" y="585" width="890" height="0" fill="none"></rect>
+
+  <!-- Bottom band -->
+  <rect x="470" y="585" width="890" height="0" fill="none"></rect>
+
+  <!-- Let's draw the bottom band at y=585..620 is too small; instead y=585 causes cutoff.
+       We'll draw at y=585? Actually canvas height is 640. We'll draw y=585 with height=45. -->
+  <rect x="470" y="585" width="890" height="45" class="box"></rect>
+  <text x="490" y="615" class="h">V-JEPA2 Video Encoder + Classifier Head</text>
+
+  <!-- Training flow arrows to V-JEPA2 band -->
+  <path d="M920 330 L920 585" class="arrow"></path>
+
+  <!-- Pills explaining model steps (placed above the band) -->
+  <rect x="470" y="510" width="280" height="44" class="pill"></rect>
+  <text x="490" y="538" class="pillText">V-JEPA2 encoder: video → embedding z</text>
+
+  <rect x="770" y="510" width="250" height="44" class="pill"></rect>
+  <text x="790" y="538" class="pillText">Pooling: mean / attention</text>
+
+  <rect x="1040" y="510" width="320" height="44" class="pill"></rect>
+  <text x="1060" y="538" class="pillText">Head: MLP → sigmoid(KB probability)</text>
+
+  <path d="M750 532 L770 532" class="arrow"></path>
+  <path d="M1020 532 L1040 532" class="arrow"></path>
+
+  <!-- Evaluation note -->
+  <rect x="470" y="330" width="890" height="0" fill="none"></rect>
+  <text x="490" y="346" class="s">Best practice: keep val/test real-only (or mostly real) to measure real-world KB detection.</text>
+
+  <!-- Legend -->
+  <rect x="40" y="600" width="390" height="28" class="box" rx="10"></rect>
+  <text x="60" y="619" class="s">Solid arrows: data flow • Dashed arrows: optional extraction / linkage</text>
+</svg>

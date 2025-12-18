@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <style>
+      .box { fill:#111827; stroke:#374151; stroke-width:2; rx:14; }
+      .title { fill:#F9FAFB; font: 700 20px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .text { fill:#E5E7EB; font: 14px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .sub { fill:#9CA3AF; font: 13px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .arrow { stroke:#E5E7EB; stroke-width:2.5; fill:none; marker-end:url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#E5E7EB"></path>
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="40" y="48" class="title">Ken Burns Effect Detection — System Architecture</text>
+  <text x="40" y="76" class="sub">Homography consistency over time: low error + high inliers + smooth parameter evolution</text>
+
+  <!-- Boxes row 1 -->
+  <rect x="40" y="110" width="240" height="120" class="box"></rect>
+  <text x="60" y="145" class="title" font-size="18">Input Video</text>
+  <text x="60" y="175" class="text">Frames over time</text>
+  <text x="60" y="198" class="sub">Optional: resize / fps choices</text>
+
+  <rect x="330" y="110" width="260" height="120" class="box"></rect>
+  <text x="350" y="145" class="title" font-size="18">Preprocess</text>
+  <text x="350" y="175" class="text">Resize → grayscale</text>
+  <text x="350" y="198" class="sub">Target width e.g. 640</text>
+
+  <rect x="640" y="110" width="260" height="120" class="box"></rect>
+  <text x="660" y="145" class="title" font-size="18">Frame Pair Analyzer</text>
+  <text x="660" y="175" class="text">ORB/SIFT → matches</text>
+  <text x="660" y="198" class="text">RANSAC homography H</text>
+
+  <rect x="950" y="110" width="210" height="120" class="box"></rect>
+  <text x="970" y="145" class="title" font-size="18">Per-frame Metrics</text>
+  <text x="970" y="175" class="text">error, inliers</text>
+  <text x="970" y="198" class="text">θ, s, tx, ty</text>
+
+  <!-- Arrows row 1 -->
+  <path d="M280 170 L330 170" class="arrow"></path>
+  <path d="M590 170 L640 170" class="arrow"></path>
+  <path d="M900 170 L950 170" class="arrow"></path>
+
+  <!-- Boxes row 2 -->
+  <rect x="40" y="275" width="360" height="170" class="box"></rect>
+  <text x="60" y="310" class="title" font-size="18">Temporal Aggregation</text>
+  <text x="60" y="342" class="text">Aggregate metrics per video</text>
+  <text x="60" y="368" class="text">Compute smoothness:</text>
+  <text x="80" y="394" class="sub">• var(param), var(d/dt), var(d²/dt²)</text>
+  <text x="80" y="417" class="sub">• max |d/dt|</text>
+
+  <rect x="440" y="275" width="360" height="170" class="box"></rect>
+  <text x="460" y="310" class="title" font-size="18">Classifier</text>
+  <text x="460" y="342" class="text">A) best threshold metric</text>
+  <text x="460" y="368" class="text">B) SVM from cached features</text>
+  <text x="460" y="394" class="sub">Uses error + inliers + smoothness stats</text>
+
+  <rect x="840" y="275" width="320" height="170" class="box"></rect>
+  <text x="860" y="310" class="title" font-size="18">Outputs + Tooling</text>
+  <text x="860" y="342" class="text">Prediction + report CSV</text>
+  <text x="860" y="368" class="text">Plots (static/interactive)</text>
+  <text x="860" y="394" class="text">Debug: inliers/outliers</text>
+  <text x="860" y="420" class="sub">Cache prevents reprocessing</text>
+
+  <!-- Arrows row 2 -->
+  <path d="M1055 230 L1055 275" class="arrow"></path>
+  <path d="M400 360 L440 360" class="arrow"></path>
+  <path d="M800 360 L840 360" class="arrow"></path>
+
+  <!-- Cache side note -->
+  <rect x="40" y="460" width="1120" height="40" class="box" rx="10"></rect>
+  <text x="60" y="486" class="sub">Cache key: video path + mtime + size + parameters (method, ransac_threshold, frame_skip, max_frames, scale_factor, target_width)</text>
+</svg>

@@ -1,0 +1,54 @@
+file_name, is_ken_burn, reasoning
+1, False, people moving about
+2, True, zoom out ken burn
+3, False, person walking
+4, True, translation up ken burn
+5, False, peron talking
+6, False, crocodile crawling
+7, True, translation right ken burn
+8, True, zoom out ken burn
+9, False, people typing
+10, False, film scene
+11, False, person talking
+12, False, rotation and zoom + artifacts and 3d projection effects
+13, False, drone shot overhead
+14, False, a spherical camera shot
+15, False, Ken burn + effects
+16, False, a cable cam shot
+17, False, Ken burn + effect?
+18, False, a spherical camera shot
+19, False, a cable cam shot
+20, False, a static photo in front of a camera translating forward
+21, True, zoom in
+22, False, a static camera shot of a scene
+23, True, a translation down
+24, False, a ken burn zoom in but with a dynamic fastforwarded video
+25, False, a cable cam forward drone shot, with static text
+26, False, a dynamic drone shot
+27, False, A cable cam shot sliding left
+28, False, a cable cam shot that barely moved, looks like an animated stop motion comic
+29, False, A cable cam shot moving forward
+30, False, basically a ken burn zoomin with effects
+31, False, a stable cam video of a person walking through a forest
+32, False, a camera tilt up drone shot
+33, False, fixed camera POV of dynamic objects (bulls)
+34, False, spherical camera shot around an object
+35, False, a camera tilt up with a small baseline 
+36, False, a cable cam shot looking up at skyscrapers
+37, False, a moving camera through a 3d scene
+38, False, a handheld camera of a dynamic scene
+39, False, a handheld camera of a dynamic scene
+40, False, a dynamic scene from POV of a roller coaster
+41, False, a fixed camera POV of a dynamic scene
+42, False, a fixed camera POV of a dynamic scene
+43, False, a fixed camera POV of a dynamic scene
+44, False, a fixed camera POV of a dynamic scene
+45, False, a cable cam drone shot
+46, True, a translation down ken burn
+47, False, a hand held camera shot in a city
+48, False, a hand held camera of a subway station with text overlay
+49, False, a rotation shot of a dynamic scene
+50, False, a fixed camera POV of a dynamic scene
+
+
+

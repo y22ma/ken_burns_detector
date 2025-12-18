@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <style>
+      .box { fill:#0B1220; stroke:#334155; stroke-width:2; rx:14; }
+      .title { fill:#F8FAFC; font: 700 18px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .text { fill:#E2E8F0; font: 14px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .sub { fill:#94A3B8; font: 13px system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+      .arrow { stroke:#E2E8F0; stroke-width:2.5; fill:none; marker-end:url(#m); }
+      .dashed { stroke-dasharray:6 6; }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#E2E8F0"></path>
+    </marker>
+  </defs>
+
+  <text x="40" y="48" class="title" font-size="22">Per-frame Pair Loop (t → t+1)</text>
+  <text x="40" y="78" class="sub">Goal: does a single planar transform explain most correspondences with smooth evolution over time?</text>
+
+  <!-- Frame nodes -->
+  <rect x="40" y="110" width="240" height="90" class="box"></rect>
+  <text x="60" y="145" class="title">Frame t</text>
+  <text x="60" y="175" class="sub">grayscale, resized</text>
+
+  <rect x="40" y="230" width="240" height="90" class="box"></rect>
+  <text x="60" y="265" class="title">Frame t+1</text>
+  <text x="60" y="295" class="sub">grayscale, resized</text>
+
+  <!-- Features -->
+  <rect x="320" y="140" width="260" height="140" class="box"></rect>
+  <text x="340" y="175" class="title">Detect + Match</text>
+  <text x="340" y="205" class="text">ORB / SIFT keypoints</text>
+  <text x="340" y="228" class="text">BF matcher + ratio test</text>
+  <text x="340" y="252" class="sub">High-quality correspondences</text>
+
+  <path d="M280 155 L320 195" class="arrow"></path>
+  <path d="M280 275 L320 225" class="arrow"></path>
+
+  <!-- RANSAC Homography -->
+  <rect x="620" y="140" width="280" height="140" class="box"></rect>
+  <text x="640" y="175" class="title">RANSAC Homography</text>
+  <text x="640" y="205" class="text">Estimate H from matches</text>
+  <text x="640" y="228" class="text">Reproj thresh ~2px</text>
+  <text x="640" y="252" class="sub">Outputs: H + inlier mask</text>
+
+  <path d="M580 210 L620 210" class="arrow"></path>
+
+  <!-- Metrics -->
+  <rect x="940" y="110" width="220" height="90" class="box"></rect>
+  <text x="960" y="145" class="title">Inliers / Outliers</text>
+  <text x="960" y="175" class="sub">inlier ratio, in/out ratio</text>
+
+  <rect x="940" y="230" width="220" height="90" class="box"></rect>
+  <text x="960" y="265" class="title">Reproj Error</text>
+  <text x="960" y="295" class="sub">mean/std/min/max</text>
+
+  <rect x="940" y="350" width="220" height="120" class="box"></rect>
+  <text x="960" y="385" class="title">Decompose H</text>
+  <text x="960" y="412" class="text">θ (rotation), s (scale)</text>
+  <text x="960" y="435" class="text">tx, ty (translation)</text>
+
+  <path d="M900 180 L940 155" class="arrow"></path>
+  <path d="M900 210 L940 275" class="arrow"></path>
+  <path d="M900 240 L940 395" class="arrow"></path>
+
+  <!-- Temporal smoothness -->
+  <rect x="320" y="330" width="580" height="140" class="box"></rect>
+  <text x="340" y="365" class="title">Accumulate over time → Smoothness</text>
+  <text x="340" y="395" class="text">Given sequences θ_t, s_t, tx_t, ty_t:</text>
+  <text x="360" y="420" class="sub">• var(param)</text>
+  <text x="360" y="442" class="sub">• var(Δparam), var(Δ²param)</text>
+  <text x="360" y="464" class="sub">• max |Δparam|</text>
+
+  <path d="M1050 200 L610 330" class="arrow dashed"></path>
+  <path d="M1050 320 L720 330" class="arrow dashed"></path>
+
+  <!-- Legend -->
+  <rect x="40" y="430" width="240" height="40" class="box" rx="10"></rect>
+  <text x="60" y="456" class="sub">Solid: per-pair computation • Dashed: accumulation over many pairs</text>
+</svg>
